@@ -1,0 +1,40 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.hero {
+    
+    &__image-container {
+        @include flex(column);
+        align-items: center;
+    }
+
+    &__image {
+
+    }
+    
+    &__image-logo {
+        width: 40rem;
+        height: 40rem;
+        opacity: 1;
+    }
+
+    &__text {
+
+    }
+
+    &__game-button-container {
+
+    }
+
+    &__button {
+
+    }
+
+    &__login-button-container {
+
+    }
+
+    &__login-button {
+
+    }
+}
