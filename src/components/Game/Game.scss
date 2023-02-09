@@ -1,0 +1,103 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/typography' as *;
+
+.game {
+	background-image: url('../../assets/images/background.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	&__info-container {
+		@include flex(column);
+		align-items: center;
+	}
+	&__progress-container {
+		width: 80%;
+		height: 1.5rem;
+		border-radius: 4rem;
+		margin: 4rem;
+		background-color: #ddd;
+	}
+
+	&__progress-bar {
+		@include flex(row-reverse);
+		height: 1.5rem;
+		border-radius: 4rem;
+		background-image: linear-gradient(to left, #f59b06, #fcd730);
+	}
+
+	&__bee {
+		margin-right: -2rem;
+		align-self: center;
+		width: 4.6rem;
+		height: 4.6rem;
+	}
+
+	&__clue-container {
+		@include flex(column);
+		align-items: center;
+		margin: 5rem;
+	}
+
+	&__description {
+		font-weight: 900;
+		text-align: center;
+	}
+
+	&__phonetics {
+		font-weight: 900;
+	}
+
+	&__etymology {
+		text-align: center;
+	}
+
+	&__controls {
+		width: 8rem;
+		height: 8rem;
+        margin-top: 0.5rem;
+        margin-left: 0.2rem;
+	}
+
+	&__input-container {
+		@include flex();
+		justify-content: space-between;
+		gap: 1rem;
+		align-items: center;
+		margin: 3rem;
+		margin-bottom: 0;
+	}
+
+	&__input {
+		@include components-padding(0, 1.6rem);
+		padding: 1.2rem;
+		border: 0;
+		outline: 2px solid $divider-form-color;
+		background-color: $secondary-background-color;
+		border-radius: 4px;
+		width: 100%;
+
+		@include tablet {
+			height: 4rem;
+			margin-bottom: 0;
+		}
+
+		&:focus-within {
+			outline: 3px solid $primary-cta-color;
+		}
+	}
+
+	&__button {
+		border: none;
+		background-color: transparent;
+	}
+
+	&__bee-button {
+		width: 6.5rem;
+		height: 7rem;
+	}
+
+	&__hide {
+		display: none;
+	}
+}

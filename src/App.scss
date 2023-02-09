@@ -3,5 +3,5 @@
 @use "./styles/partials/mixins" as *;
 
 .App {
-    background-color: #E5D1CA;
+    background-color: $primary-background-color;
 }

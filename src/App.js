@@ -9,12 +9,12 @@ import Footer from './components/Footer/Footer';
 
 import './App.scss';
 
-
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <BrowserRouter>
+	
+	return (
+		<div className='App'>
+			<Header />
+			<BrowserRouter>
 				<Routes>
 					<Route
 						path='/'
@@ -24,27 +24,27 @@ function App() {
 						path='/profile'
 						element={<ProfilePage />}
 					/>
-          <Route
+					<Route
 						path='/game'
 						element={<GamePage />}
 					/>
-          <Route
+					<Route
 						path='/game/:difficulty'
 						element={<GamePage />}
 					/>
-          <Route
+					<Route
 						path='/custom'
 						element={<CustomPage />}
 					/>
-          <Route
+					<Route
 						path='*'
 						element={<NotFoundPage />}
 					/>
 				</Routes>
 			</BrowserRouter>
-      <Footer />
-    </div>
-  );
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
