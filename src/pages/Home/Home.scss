@@ -1,6 +1,13 @@
-@use "../../styles/partials/variables" as *;
-@use "../../styles/partials/mixins" as *;
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
 
 .home {
-
+	background-image: linear-gradient(
+        rgba(185, 185, 185, 0.6),
+        rgba(172, 172, 172, 0.8 )
+      ), url(../../assets/images/honey_comb_background.jfif);
+    // background-size: cover;
+    // background-repeat: no-repeat;
+	height: 100vh;
+	background-color: #ffffff;
 }
