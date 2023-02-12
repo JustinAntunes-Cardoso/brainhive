@@ -1,0 +1,55 @@
+@use './variables' as *;
+
+@mixin reset-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+@mixin reset-anchor {
+    text-decoration: none;
+    color: $primary-background-color;
+}
+
+@mixin layout-margin ($side-margin: 1.6rem) {
+    margin: 0 $side-margin;
+}
+
+@mixin headlines-padding($top: 2.4rem, $bottom: 1.6rem) {
+    margin-top: $top;
+    margin-bottom: $bottom;
+}
+
+@mixin components-padding($top: 1.6rem, $bottom: 1.6rem) {
+    margin-top: $top;
+    margin-bottom: $bottom;
+}
+
+@mixin flex($direction: row) {
+    display: flex;
+    flex-direction: $direction;
+}
+
+@mixin font-selector($size, $height, $weight) {
+    font-size: $size;
+    line-height: $height;
+    font-weight: $weight;
+}
+
+@mixin mobileL {
+    @media screen and (min-width: $mobileL-breakpoint) {
+        @content;
+    }    
+}
+
+@mixin tablet {
+    @media screen and (min-width: $tablet-breakpoint) {
+        @content;
+    }    
+}
+
+@mixin desktop {
+    @media screen and (min-width: $desktop-breakpoint) {
+        @content;
+    }
+}

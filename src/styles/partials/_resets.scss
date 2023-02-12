@@ -1,0 +1,39 @@
+@use './variables' as *;
+@use './mixins' as *;
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+::placeholder {
+	color: $primary-text-color;
+	@include font-selector(1.4rem, 2rem, 400);
+	font-family: $font-stack;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-size: 1.6rem;
+	font-family: $font-stack;
+	margin: 0;
+	color: $primary-text-color;
+	background-color: $primary-background-color;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: $primary-text-color;
+}
+
+input {
+	font-family: $font-stack;
+}

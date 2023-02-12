@@ -1,0 +1,13 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.footer {
+	background-image: linear-gradient(to bottom, #fcd730, #f59b06);
+	height: 10vh;
+	width: 100%;
+	@include flex();
+	align-items: center;
+	justify-content: center;
+
+	@include font-selector(2.4rem, 2.6rem, 700);
+}

@@ -1,0 +1,39 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.hero {
+    
+    &__image-container {
+        @include flex(column);
+        align-items: center;
+        justify-content: center;
+        height: 80vh;
+        padding-top: 6rem;
+        gap: 1rem;
+
+        @include tablet {
+            gap: 2.8rem;
+        }
+
+        @include desktop {
+            padding-top: 9rem;
+            gap: 5rem;
+        }
+    }
+    
+    &__image-logo {
+        width: 24.5rem;
+        height: 24.5rem;
+        opacity: 1;
+ 
+        @include tablet() {
+            width: 34rem;
+            height: 34rem;
+        }
+
+        @include desktop() {
+            width: 55rem;
+            height: 55rem;
+        }
+    }
+}

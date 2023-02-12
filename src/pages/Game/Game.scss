@@ -1,0 +1,14 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.game-page{
+    background-image: url('../../assets/images/honey_comb_background.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+
+    &__honey {
+        width: 101%;
+        min-height: 3.8rem;
+        margin: -0.2rem;
+    }
+}
