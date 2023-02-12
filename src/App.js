@@ -6,27 +6,31 @@ import CustomPage from './pages/Custom';
 import ProfilePage from './pages/Profile';
 import NotFoundPage from './pages/NotFound';
 import Footer from './components/Footer/Footer';
-
+// import LoginPage from './pages/Login/Login';
+// import SignupPage from './pages/Signup/Signup';
 import './App.scss';
 
 function App() {
-	
 	return (
 		<div className='App'>
-			<Header />
 			<BrowserRouter>
+				<Header />
 				<Routes>
 					<Route
 						path='/'
 						element={<HomePage />}
 					/>
-					<Route
-						path='/profile'
-						element={<ProfilePage />}
+					{/* <Route
+						path='/login'
+						element={<LoginPage />}
 					/>
 					<Route
-						path='/game'
-						element={<GamePage />}
+						path='/signup'
+						element={<SignupPage />}
+					/> */}
+					<Route
+						path='/profile/:userId'
+						element={<ProfilePage />}
 					/>
 					<Route
 						path='/game/:difficulty'
@@ -41,8 +45,8 @@ function App() {
 						element={<NotFoundPage />}
 					/>
 				</Routes>
+				<Footer />
 			</BrowserRouter>
-			<Footer />
 		</div>
 	);
 }

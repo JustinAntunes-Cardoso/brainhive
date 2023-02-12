@@ -36,6 +36,12 @@
     font-weight: $weight;
 }
 
+@mixin mobileL {
+    @media screen and (min-width: $mobileL-breakpoint) {
+        @content;
+    }    
+}
+
 @mixin tablet {
     @media screen and (min-width: $tablet-breakpoint) {
         @content;

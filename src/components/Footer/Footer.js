@@ -3,9 +3,9 @@ import './Footer.scss'
 
 function Footer() {
   return (
-    <div>
-      
-    </div>
+    <footer className='footer'>
+        © Justin Antunes-Cardoso
+    </footer>
   )
 }
 
