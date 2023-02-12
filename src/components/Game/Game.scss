@@ -3,27 +3,42 @@
 @use '../../styles/partials/typography' as *;
 
 .game {
-	background-image: url('../../assets/images/background.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
+
+	height: 80vh;
 
 	&__info-container {
 		@include flex(column);
 		align-items: center;
+		@include layout-margin();
+		@include headlines-padding();
+
+		@include tablet() {
+			@include layout-margin(3.6rem);
+			@include headlines-padding(6rem, 2.4rem);
+		}
+
+		@include desktop {
+			width: 102rem;
+			margin: 0 auto;
+			@include headlines-padding(6rem, 3rem);
+		}
 	}
 	&__progress-container {
-		width: 80%;
+		width: 92%;
 		height: 1.5rem;
 		border-radius: 4rem;
-		margin: 4rem;
-		background-color: #ddd;
+		background-color: $secondary-background-color;
+
+		@include desktop {
+			width: 100%;
+		}
 	}
 
 	&__progress-bar {
 		@include flex(row-reverse);
 		height: 1.5rem;
 		border-radius: 4rem;
-		background-image: linear-gradient(to left, #f59b06, #fcd730);
+		background-image: linear-gradient(to left, $primary-border-color, $cta-hover-color);
 	}
 
 	&__bee {
@@ -36,65 +51,144 @@
 	&__clue-container {
 		@include flex(column);
 		align-items: center;
-		margin: 5rem;
+		@include layout-margin();
+		@include headlines-padding(3.6rem);
+
+		@include tablet() {
+			@include headlines-padding(4.2rem);
+		}
+
+		@include desktop() {
+			width: 92%;
+		}
 	}
 
 	&__description {
 		font-weight: 900;
 		text-align: center;
+		@include font-selector(1.8rem, 2.2rem, 900);
+		margin-bottom: 2.8rem;
+
+		@include tablet() {
+			@include font-selector(2.2rem, 2.4rem, 900);
+		}
+
+		@include desktop() {
+			@include font-selector(2.8rem, 2.6rem, 900);
+			margin-bottom: 3.6rem;
+		}
 	}
 
 	&__phonetics {
 		font-weight: 900;
+		@include font-selector(2.2rem, 2.2rem, 900);
+		margin: 1.6rem 0 1.8rem;
+
+		@include tablet() {
+			@include font-selector(2.6rem, 2.4rem, 900);
+		}
+
+		@include desktop() {
+			@include font-selector(3.2rem, 2.6rem, 900);
+			margin: 3.2rem 0 3.6rem;
+		}
 	}
 
 	&__etymology {
 		text-align: center;
+		@include font-selector(1.4rem, 1.8rem, 700);
+
+		@include tablet() {
+			@include font-selector(1.8rem, 2.4rem, 700);
+		}
+
+		@include desktop() {
+			@include font-selector(2.2rem, 2rem, 700);
+		}
 	}
 
 	&__controls {
 		width: 8rem;
 		height: 8rem;
         margin-top: 0.5rem;
-        margin-left: 0.2rem;
+        margin-left: 0.1rem;
+		cursor: pointer;
+
+		&--disabled {
+			cursor: default;
+		}
 	}
 
 	&__input-container {
 		@include flex();
+		@include layout-margin();
+		@include components-padding();
+		margin-bottom: 0;
+		padding-bottom: 1.6rem;
 		justify-content: space-between;
 		gap: 1rem;
 		align-items: center;
-		margin: 3rem;
-		margin-bottom: 0;
+
+		@include tablet() {
+			@include layout-margin(3.6rem);
+			@include headlines-padding(3.6rem, 0);
+			justify-content: center;
+			padding-bottom: 2.4rem;
+		}
+
+		@include desktop {
+			width: 102rem;
+			margin: 0 auto;
+			padding-bottom: 4.2rem;
+			gap: 4rem;
+		}
+		
 	}
 
 	&__input {
-		@include components-padding(0, 1.6rem);
 		padding: 1.2rem;
 		border: 0;
-		outline: 2px solid $divider-form-color;
-		background-color: $secondary-background-color;
+		outline: 2px solid $cta-hover-color;
+		background-color: $input-background-color;
 		border-radius: 4px;
 		width: 100%;
 
 		@include tablet {
 			height: 4rem;
-			margin-bottom: 0;
+			max-width: 60rem;
+		}
+
+		@include desktop {
+			padding: 1.6rem;
+			height: 5.5rem;
+			max-width: 70rem;
+			font-size: 2.2rem;
 		}
 
 		&:focus-within {
-			outline: 3px solid $primary-cta-color;
+			outline: 3px solid $primary-border-color;
 		}
 	}
 
 	&__button {
 		border: none;
 		background-color: transparent;
+		cursor: pointer;
 	}
 
 	&__bee-button {
 		width: 6.5rem;
 		height: 7rem;
+
+		@include desktop {
+			width: 8.5rem;
+			height: 9rem;
+		}
+
+		@include desktop {
+			width: 11.5rem;
+			height: 12rem;
+		}
 	}
 
 	&__hide {

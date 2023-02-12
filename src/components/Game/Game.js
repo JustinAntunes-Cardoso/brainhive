@@ -4,8 +4,8 @@ import progressBee from '../../assets/images/progress_bee.png';
 import playButton from '../../assets/images/play-button.svg';
 import playGrayButton from '../../assets/images/play-gray-button.svg';
 import pauseButton from '../../assets/images/pause.svg';
+import pauseGrayButton from '../../assets/images/pause-gray.svg';
 import honeyButton from '../../assets/images/Honey_Button.png';
-import honey from '../../assets/images/honey_drip_background.png';
 import './Game.scss';
 
 const intialValues = {
@@ -35,7 +35,11 @@ function Game({ words, setResults, isDone, setScore }) {
 
 		setQuestion(words[index]);
 
-		console.log(index);
+		if (score.length >= 10) {
+			while (score.length) {
+				score.pop();
+			}
+		}
 	}, [index]);
 
 	const handleAudioEnded = () => {
@@ -46,11 +50,15 @@ function Game({ words, setResults, isDone, setScore }) {
 		setIsPlaying(true);
 	};
 
+	const handleAudioPause = () => {
+		setIsPlaying(false);
+	};
+
 	const completeGame = () => {
 		setDisabled(!disabled);
+		setResults(score);
 		setTimeout(() => {
 			isDone(true);
-			setResults(score);
 		}, 1000);
 	};
 
@@ -123,18 +131,27 @@ function Game({ words, setResults, isDone, setScore }) {
 	const renderTime = ({ remainingTime }) => {
 		if (remainingTime === 0) {
 			return (
-				<div className='timer'>
+				<div className='game__timer'>
 					<img
 						src={playGrayButton}
-						className={!isPlaying ? 'game__controls' : 'game__hide'}
+						className={
+							!isPlaying
+								? 'game__controls game__controls--disabled'
+								: 'game__hide'
+						}
 						alt='Play Button'
+					/>
+					<img
+						src={pauseGrayButton}
+						className={isPlaying ? 'game__controls game__controls--disabled' : 'game__hide'}
+						alt='Pause Button'
 					/>
 				</div>
 			);
 		}
 
 		return (
-			<div className='timer'>
+			<div className='game__timer'>
 				<img
 					src={playButton}
 					className={!isPlaying ? 'game__controls' : 'game__hide'}
@@ -155,11 +172,6 @@ function Game({ words, setResults, isDone, setScore }) {
 		<></>
 	) : (
 		<section className='game'>
-			<img
-				className='game-page__honey'
-				src={honey}
-				alt='Honey Drip'
-			/>
 			<article className='game__info-container'>
 				<div className='game__progress-container'>
 					<div
@@ -180,6 +192,7 @@ function Game({ words, setResults, isDone, setScore }) {
 							ref={audioRef}
 							onPlay={handleAudioPlay}
 							onEnded={handleAudioEnded}
+							onPause={handleAudioPause}
 							src={question.audio}>
 							<a href={question.audio}> Download audio </a>
 						</audio>
