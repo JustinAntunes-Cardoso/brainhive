@@ -6,35 +6,34 @@
     &__image-container {
         @include flex(column);
         align-items: center;
-    }
+        justify-content: center;
+        height: 80vh;
+        padding-top: 6rem;
+        gap: 1rem;
 
-    &__image {
+        @include tablet {
+            gap: 2.8rem;
+        }
 
+        @include desktop {
+            padding-top: 9rem;
+            gap: 5rem;
+        }
     }
     
     &__image-logo {
-        width: 40rem;
-        height: 40rem;
+        width: 24.5rem;
+        height: 24.5rem;
         opacity: 1;
-    }
+ 
+        @include tablet() {
+            width: 34rem;
+            height: 34rem;
+        }
 
-    &__text {
-
-    }
-
-    &__game-button-container {
-
-    }
-
-    &__button {
-
-    }
-
-    &__login-button-container {
-
-    }
-
-    &__login-button {
-
+        @include desktop() {
+            width: 55rem;
+            height: 55rem;
+        }
     }
 }

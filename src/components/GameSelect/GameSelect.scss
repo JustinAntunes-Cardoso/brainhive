@@ -1,2 +1,81 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
+
+.game-selected {
+
+    @include flex();
+    justify-content: center;
+    @include layout-margin();
+    height: 75vh;
+
+    &__button-container {
+        @include flex();
+        @include headlines-padding();
+        height: 20vh;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 1.2rem;
+
+        @include tablet {
+            gap: 1.8rem;
+        }
+
+        @include desktop {
+            gap: 2.4rem;
+        }
+    }
+
+    &__button {
+        @include flex();
+        align-items: center;
+        gap: 1rem;
+        @include font-selector(1.6rem, 2rem, 900);
+        letter-spacing: 0.2rem;
+        cursor: pointer;
+        height: 6rem;
+        min-width: 13rem;
+        max-width: 15rem;
+        border-radius: 0.6rem;
+        padding-left: 1rem;
+        color: $primary-background-color;
+        background-color: $primary-cta-color;
+        border: 3px solid $primary-border-color;
+        box-shadow: 1rem 0.75rem 0.75rem rgba($color: $shadow-color, $alpha: 0.5);
+
+        @include tablet {
+            min-width: 20rem;
+            max-width: 22rem;
+            padding-left: 1rem;
+            gap: 1rem;
+            @include font-selector(1.8rem, 2rem, 900);
+            padding-left: 1.4rem;
+            gap: 2rem;
+            height: 6.5rem;
+        }
+
+        @include desktop {
+            min-width: 22rem;
+            max-width: 24rem;
+            @include font-selector(2rem, 2rem, 900);
+            padding-left: 1.8rem;
+            gap: 2.8rem;
+            height: 7.5rem;
+            border: 4px solid $primary-border-color;
+        }
+
+        &:hover {
+            background-color: $cta-hover-color;
+            border-color: $secondary-border-color;
+        }
+    }
+
+    &__bug {
+        width: 3rem;
+        height: 3rem;
+
+        @include desktop {
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+}
