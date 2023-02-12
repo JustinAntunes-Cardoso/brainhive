@@ -1,2 +1,105 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
+
+.game-results {
+	@include flex(column);
+	align-items: center;
+	@include layout-margin();
+	@include headlines-padding();
+	margin-bottom: 0;
+
+	@include tablet() {
+		@include layout-margin(3.6rem);
+		@include headlines-padding(4.8rem, 0);
+        padding-bottom: 2.4rem;
+	}
+
+	@include desktop {
+		width: 102rem;
+		margin: 0 auto;
+		@include headlines-padding(5.6rem, 0);
+        padding-bottom: 3rem;
+	}
+
+	&__title {
+		text-align: center;
+		@include font-selector(2.2rem, 2.2rem, 900);
+		margin-bottom: 2.4rem;
+
+		@include tablet() {
+			@include font-selector(2.6rem, 2.4rem, 900);
+            margin-bottom: 4rem;
+		}
+
+		@include desktop() {
+			@include font-selector(3.2rem, 2.6rem, 900);
+			margin-bottom: 5rem;
+		}
+	}
+
+	&__table-container {
+        @include flex();
+        justify-content: center;
+		overflow-x: auto;
+		padding-bottom: 2.4rem;	
+        margin-bottom: 1.6rem;
+        width: 100%;
+
+        @include tablet() {
+			@include font-selector(2.6rem, 2.4rem, 700);
+		}
+
+		@include desktop() {
+			@include font-selector(3.2rem, 2.6rem, 700);
+		}
+	}
+
+	&__table {
+		border-collapse: collapse;
+        border-radius: 10px;
+        box-shadow: 1rem 0.6rem 0.6rem rgba($color: $shadow-color, $alpha: 0.5);
+		background-color: rgba($color: $input-background-color, $alpha: 0.6);
+		overflow: hidden;
+		text-align: center;
+        margin-left: 4rem;
+
+        @include mobileL() {
+			margin-left: 0;
+		}
+	}
+
+
+}
+
+th {
+	border: 2px solid $primary-border-color;
+	background-color: $input-background-color;
+    padding: 0.8rem;
+
+    @include tablet() {
+        padding: 1.2rem;
+    }
+
+    @include desktop() {
+        padding: 1.6rem;
+    }
+}
+
+td {
+	border: 2px dashed $primary-border-color;
+	padding: 0.8rem;
+
+    @include tablet() {
+        padding: 1.2rem;
+    }
+
+    @include desktop() {
+        padding: 1.6rem;
+    }
+}
+
+tr:nth-child(2n) td:nth-child(2n + 1),
+tr:nth-child(2n + 1) td:nth-child(2n) {
+	background-color: $cta-hover-color;
+	color: $primary-background-color;
+}
