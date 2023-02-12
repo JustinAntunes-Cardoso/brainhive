@@ -40,7 +40,7 @@ function Game({ words, setResults, isDone, setScore }) {
 				score.pop();
 			}
 		}
-	}, [index]);
+	}, [words, index]);
 
 	const handleAudioEnded = () => {
 		setIsPlaying(false);
