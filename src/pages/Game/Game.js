@@ -6,8 +6,8 @@ import GameResults from '../../components/GameResults';
 import honey from '../../assets/images/honey_drip_background.png';
 import './Game.scss';
 
-const URL = 'http://localhost:8080/';
-const PATH = 'words/';
+const apiBaseUrl = process.env.API_BASE_URL || "https://brainhive.herokuapp.com";
+const apiEndpoint = process.env.WORDS_PATH || "/words";
 
 function GamePage() {
 	//Checks to see if game is selected
@@ -17,10 +17,13 @@ function GamePage() {
 	const [results, setResults] = useState(undefined);
 	const [score, setScore] = useState(0);
 
+	console.log(process.env)
+	console.log(`${apiBaseUrl}${apiEndpoint}/${difficulty}`)
+
 	useEffect(() => {
 		const setGame = async () => {
 			try {
-				const { data } = await axios.get(`${URL}${PATH}${difficulty}`);
+				const { data } = await axios.get(`${apiBaseUrl}${apiEndpoint}/${difficulty}`);
 				setWords(data);
 			} catch (error) {
 				console.error(error);
