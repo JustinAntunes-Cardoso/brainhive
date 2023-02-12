@@ -4,20 +4,22 @@ $font-stack: "Nunito";
 //primary colours
 $primary-text-color: #323232;
 $primary-background-color: #FFFFFF;
-$primary-cta-color: #0095FF;
+$primary-cta-color: #FBC204;
+$primary-border-color: #F59B06;
 $secondary-text-color: #AFAFAF;
 
+
 //secondary colours
-$video-player-color: #000000;
-$secondary-background-color: #FAFAFA;
-$cta-hover-color: #0065AD;
+$shadow-color: #000000;
+$secondary-background-color: #DDDDDD;
+$secondary-border-color: #BD6F09;
+$cta-hover-color: #FCD730;
 $divider-form-color: #E1E1E1;
+$input-background-color: #FAFAFA;
 
 
 //Responsive breakpoints
-$mobilem-breakpoint: 375px;
-$mobilel-breakpoint: 425px;
-$laptop-breakpoint: 1024px;
+$mobileL-breakpoint: 425px;
 $tablet-breakpoint: 768px;
 $desktop-breakpoint: 1280px;
 
