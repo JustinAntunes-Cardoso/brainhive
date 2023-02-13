@@ -49,22 +49,6 @@ function Game({ words, setResults, isDone, setScore }) {
 		}
 	}, [words, index]);
 
-	const handleChange = () => {
-		setInputError(false);
-	};
-
-	const handleAudioEnded = () => {
-		setIsPlaying(false);
-	};
-
-	const handleAudioPlay = () => {
-		setIsPlaying(true);
-	};
-
-	const handleAudioPause = () => {
-		setIsPlaying(false);
-	};
-
 	const completeGame = () => {
 		setDisabled(!disabled);
 		setResults(score);
@@ -112,6 +96,7 @@ function Game({ words, setResults, isDone, setScore }) {
 
 		if (!response) {
 			setInputError(true);
+			inputRef.current.value = ''
 		} else {
 			setInputError(false);
 			setKey(key + 1);
@@ -210,9 +195,9 @@ function Game({ words, setResults, isDone, setScore }) {
 						<audio
 							autoPlay
 							ref={audioRef}
-							onPlay={handleAudioPlay}
-							onEnded={handleAudioEnded}
-							onPause={handleAudioPause}
+							onPlay={() => setIsPlaying(true)}
+							onEnded={() => setIsPlaying(false)}
+							onPause={() => setIsPlaying(false)}
 							src={question.audio}>
 							<a href={question.audio}> Download audio </a>
 						</audio>
@@ -242,7 +227,7 @@ function Game({ words, setResults, isDone, setScore }) {
 								inputError ? 'game__input game__input--error' : 'game__input'
 							}
 							ref={inputRef}
-							onChange={handleChange}
+							onClick={() => setInputError(false)}
 							autoCorrect='off'
 							spellCheck={false}
 						/>
