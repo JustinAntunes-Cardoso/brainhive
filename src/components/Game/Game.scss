@@ -3,7 +3,6 @@
 @use '../../styles/partials/typography' as *;
 
 .game {
-
 	height: 80vh;
 
 	&__info-container {
@@ -38,7 +37,11 @@
 		@include flex(row-reverse);
 		height: 1.5rem;
 		border-radius: 4rem;
-		background-image: linear-gradient(to left, $primary-border-color, $cta-hover-color);
+		background-image: linear-gradient(
+			to left,
+			$primary-border-color,
+			$cta-hover-color
+		);
 	}
 
 	&__bee {
@@ -110,8 +113,8 @@
 	&__controls {
 		width: 8rem;
 		height: 8rem;
-        margin-top: 0.5rem;
-        margin-left: 0.1rem;
+		margin-top: 0.5rem;
+		margin-left: 0.1rem;
 		cursor: pointer;
 
 		&--disabled {
@@ -142,7 +145,6 @@
 			padding-bottom: 4.2rem;
 			gap: 4rem;
 		}
-		
 	}
 
 	&__input {
@@ -152,6 +154,9 @@
 		background-color: $input-background-color;
 		border-radius: 4px;
 		width: 100%;
+		-webkit-user-select: none;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
 
 		@include tablet {
 			height: 4rem;
