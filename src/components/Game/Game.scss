@@ -3,10 +3,9 @@
 @use '../../styles/partials/typography' as *;
 
 .game {
-
-	@include tablet {
-		height: 80vh;
-	}
+	@include flex(column);
+	justify-content: space-evenly;
+	height: 90vh;
 
 	&__info-container {
 		@include flex(column);
@@ -128,24 +127,17 @@
 	&__input-container {
 		@include flex();
 		@include layout-margin();
-		@include components-padding();
-		margin-bottom: 0;
-		padding-bottom: 1.6rem;
-		justify-content: space-between;
+		justify-content: center;
 		gap: 1rem;
 		align-items: center;
 
 		@include tablet() {
 			@include layout-margin(3.6rem);
-			@include headlines-padding(3.6rem, 0);
-			justify-content: center;
-			padding-bottom: 2.4rem;
 		}
 
 		@include desktop {
 			width: 102rem;
 			margin: 0 auto;
-			padding-bottom: 4.2rem;
 			gap: 4rem;
 		}
 	}
@@ -170,12 +162,7 @@
 		background-color: $input-background-color;
 		border-radius: 4px;
 		width: 100%;
-		text-size-adjust: 100%;
-		-webkit-user-select: none;
-		-webkit-text-size-adjust: 100%;
-		-ms-text-size-adjust: 100%;
-		max-zoom: 1;
-		user-select: none;
+		touch-action: manipulation;
 
 		@include tablet {
 			height: 4rem;

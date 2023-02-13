@@ -1,8 +1,1 @@
-# Redirect to a specific page on the same domain
-/  https://thebrainhive.com/
-
-# Rewrite a URL path to a different path
-/game/:difficulty  https://thebrainhive.com/game/:difficulty
-
-# Redirect all 404 errors to a custom page
-/*  https://thebrainhive.com/*  404
+/* /index.html 200
