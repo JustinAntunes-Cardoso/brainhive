@@ -32,7 +32,9 @@ function Game({ words, setResults, isDone, setScore }) {
 	useEffect(() => {
 		const pattern = new RegExp(words[index].word, 'g');
 		words[index].etymology = words[index].etymology.replace(pattern, '🏵️🏵️🏵️');
-
+		words[index].etymology = words[index].etymology.charAt(0).toUpperCase() + words[index].etymology.slice(1);
+		words[index].definition = words[index].definition.charAt(0).toUpperCase() + words[index].definition.slice(1);
+		
 		setQuestion(words[index]);
 
 		if (score.length >= 10) {
