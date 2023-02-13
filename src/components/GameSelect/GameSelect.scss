@@ -6,7 +6,6 @@
     @include flex();
     justify-content: center;
     @include layout-margin();
-    height: 75vh;
 
     &__button-container {
         @include flex();

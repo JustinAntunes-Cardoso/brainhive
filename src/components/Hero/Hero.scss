@@ -6,19 +6,8 @@
     &__image-container {
         @include flex(column);
         align-items: center;
-        justify-content: center;
+        justify-content: space-around;
         height: 80vh;
-        padding-top: 6rem;
-        gap: 1rem;
-
-        @include tablet {
-            gap: 2.8rem;
-        }
-
-        @include desktop {
-            padding-top: 8.5rem;
-            gap: 3.8rem;
-        }
     }
     
     &__image-logo {
