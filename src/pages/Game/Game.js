@@ -7,7 +7,7 @@ import honey from '../../assets/images/honey_drip_background.png';
 import './Game.scss';
 
 const apiBaseUrl = process.env.API_BASE_URL || "https://brainhive.herokuapp.com";
-const apiEndpoint = process.env.WORDS_PATH || "/words";
+const apiEndpoint = process.env.WORDS_PATH || '/words';
 
 function GamePage() {
 	//Checks to see if game is selected
