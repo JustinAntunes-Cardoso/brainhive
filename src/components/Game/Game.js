@@ -24,6 +24,7 @@ function Game({ words, setResults, isDone, setScore }) {
 	const [index, setIndex] = useState(0);
 	const [progress, setProgress] = useState(0);
 	const [disabled, setDisabled] = useState(false);
+	const [inputError, setInputError] = useState(false);
 	const [key, setKey] = useState(0);
 	const [isPlaying, setIsPlaying] = useState(false);
 	const audioRef = useRef(null);
@@ -32,9 +33,13 @@ function Game({ words, setResults, isDone, setScore }) {
 	useEffect(() => {
 		const pattern = new RegExp(words[index].word, 'g');
 		words[index].etymology = words[index].etymology.replace(pattern, '🏵️🏵️🏵️');
-		words[index].etymology = words[index].etymology.charAt(0).toUpperCase() + words[index].etymology.slice(1);
-		words[index].definition = words[index].definition.charAt(0).toUpperCase() + words[index].definition.slice(1);
-		
+		words[index].etymology =
+			words[index].etymology.charAt(0).toUpperCase() +
+			words[index].etymology.slice(1);
+		words[index].definition =
+			words[index].definition.charAt(0).toUpperCase() +
+			words[index].definition.slice(1);
+
 		setQuestion(words[index]);
 
 		if (score.length >= 10) {
@@ -43,6 +48,10 @@ function Game({ words, setResults, isDone, setScore }) {
 			}
 		}
 	}, [words, index]);
+
+	const handleChange = () => {
+		setInputError(false);
+	};
 
 	const handleAudioEnded = () => {
 		setIsPlaying(false);
@@ -101,33 +110,38 @@ function Game({ words, setResults, isDone, setScore }) {
 		e.preventDefault();
 		const response = e.target.word.value.trim().toLowerCase();
 
-		setKey(key + 1);
+		if (!response) {
+			setInputError(true);
+		} else {
+			setInputError(false);
+			setKey(key + 1);
 
-		question.word.toLowerCase() === response
-			? score.push({
-					id: index + 1,
-					input: response,
-					correct: '✅',
-					answer: question.word,
-			  })
-			: score.push({
-					id: index + 1,
-					input: response,
-					correct: '❌',
-					answer: question.word,
-			  });
+			question.word.toLowerCase() === response
+				? score.push({
+						id: index + 1,
+						input: response,
+						correct: '✅',
+						answer: question.word,
+				  })
+				: score.push({
+						id: index + 1,
+						input: response,
+						correct: '❌',
+						answer: question.word,
+				  });
 
-		if (question.word.toLowerCase() === response) {
-			numOfCorrectAnswers++;
-			setScore(numOfCorrectAnswers);
+			if (question.word.toLowerCase() === response) {
+				numOfCorrectAnswers++;
+				setScore(numOfCorrectAnswers);
+			}
+
+			setProgress(progress + 10);
+
+			console.log(score);
+			index < words.length - 1 ? setIndex(index + 1) : completeGame();
+
+			e.target.reset();
 		}
-
-		setProgress(progress + 10);
-
-		console.log(score);
-		index < words.length - 1 ? setIndex(index + 1) : completeGame();
-
-		e.target.reset();
 	};
 
 	const renderTime = ({ remainingTime }) => {
@@ -145,7 +159,11 @@ function Game({ words, setResults, isDone, setScore }) {
 					/>
 					<img
 						src={pauseGrayButton}
-						className={isPlaying ? 'game__controls game__controls--disabled' : 'game__hide'}
+						className={
+							isPlaying
+								? 'game__controls game__controls--disabled'
+								: 'game__hide'
+						}
 						alt='Pause Button'
 					/>
 				</div>
@@ -217,13 +235,21 @@ function Game({ words, setResults, isDone, setScore }) {
 				className='game__form'
 				onSubmit={getNewWord}>
 				<div className='game__input-container'>
-					<input
-						id='word'
-						className='game__input'
-						ref={inputRef}
-						autoCorrect='off'
-						spellCheck={false}
-					/>
+					<div className={inputError ? 'game__error-container' : ''}>
+						<input
+							id='word'
+							className={
+								inputError ? 'game__input game__input--error' : 'game__input'
+							}
+							ref={inputRef}
+							onChange={handleChange}
+							autoCorrect='off'
+							spellCheck={false}
+						/>
+						<h3 className={inputError ? 'game__error-message' : 'game__hide'}>
+							Please enter your response!
+						</h3>
+					</div>
 					<button
 						disabled={disabled}
 						className='game__button'>
