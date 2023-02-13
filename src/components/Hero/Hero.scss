@@ -16,8 +16,8 @@
         }
 
         @include desktop {
-            padding-top: 9rem;
-            gap: 5rem;
+            padding-top: 8.5rem;
+            gap: 4rem;
         }
     }
     
@@ -32,8 +32,8 @@
         }
 
         @include desktop() {
-            width: 50rem;
-            height: 50rem;
+            width: 42rem;
+            height: 42rem;
         }
     }
 }
