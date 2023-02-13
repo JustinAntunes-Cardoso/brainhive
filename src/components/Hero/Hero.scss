@@ -27,13 +27,13 @@
         opacity: 1;
  
         @include tablet() {
-            width: 34rem;
-            height: 34rem;
+            width: 30rem;
+            height: 30rem;
         }
 
         @include desktop() {
-            width: 55rem;
-            height: 55rem;
+            width: 50rem;
+            height: 50rem;
         }
     }
 }
