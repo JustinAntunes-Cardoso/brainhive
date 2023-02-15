@@ -6,14 +6,17 @@ import GameResults from '../../components/GameResults';
 import honey from '../../assets/images/honey_drip_background.png';
 import './Game.scss';
 
-const apiBaseUrl = process.env.API_BASE_URL || "https://brainhive.herokuapp.com";
-const apiEndpoint = process.env.WORDS_PATH || '/words';
+//API connection
+const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || "https://brainhive.herokuapp.com";
+const apiEndpoint = process.env.REACT_APP_WORDS_PATH || '/words';
 
 function GamePage() {
-	//Checks to see if game is selected
+	//Sets the game difficulty and word
 	const { difficulty } = useParams()
 	const [words, setWords] = useState(undefined);
+	//checks to see if the game is completed
 	const [done, isDone] = useState(false);
+	//sets the results and score to a game result component
 	const [results, setResults] = useState(undefined);
 	const [score, setScore] = useState(0);
 
@@ -21,6 +24,7 @@ function GamePage() {
 	console.log(`${apiBaseUrl}${apiEndpoint}/${difficulty}`)
 
 	useEffect(() => {
+		//Pulls 10 random words from an API
 		const setGame = async () => {
 			try {
 				const { data } = await axios.get(`${apiBaseUrl}${apiEndpoint}/${difficulty}`);
@@ -40,6 +44,7 @@ function GamePage() {
 				src={honey}
 				alt='Honey Drip'
 			/>
+			{/* If the game is done show the results */}
 			{done ? (
 				<GameResults results={results} score={score} done={done}/>
 			) :  words !== undefined ? (
