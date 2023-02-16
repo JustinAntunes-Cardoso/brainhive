@@ -1,6 +1,36 @@
+import axios from 'axios';
 import './GameResults.scss';
 
+const USER = process.env.REACT_APP_USER;
+const apiBaseUrl =
+	process.env.REACT_APP_API_BASE_URL;
+const apiGameEndpoint = process.env.REACT_APP_GAME_PATH;
+const apiQuestionEndpoint = process.env.REACT_APP_QUESTION_PATH;
+
 function GameResults({ results, score }) {
+	const saveGame = async () => {
+		try {
+			//post game data
+			const { data } = await axios.post(`${apiBaseUrl}${apiGameEndpoint}`, {
+				user_id: USER,
+				level: results[0].level,
+			});
+			//post questions data
+			for (let result of results) {
+				await axios.post(`${apiBaseUrl}${apiQuestionEndpoint}`, {
+					game_id: data.game_id,
+					word_id: result.word_id,
+					answer: result.input,
+					correct: result.bool,
+				});
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	saveGame();
+
 	return (
 		<section className='game-results'>
 			<h1 className='game-results__title'>{`${

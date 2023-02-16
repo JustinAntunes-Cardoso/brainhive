@@ -8,6 +8,7 @@ import pauseGrayButton from '../../assets/images/pause-gray.svg';
 import honeyButton from '../../assets/images/Honey_Button.png';
 import './Game.scss';
 
+//Initializa values
 const intialValues = {
 	word: '',
 	phonetics: '',
@@ -16,23 +17,32 @@ const intialValues = {
 	etymology: '',
 };
 
+//save results in
 const score = [];
 let numOfCorrectAnswers = 0;
 
 function Game({ words, setResults, isDone, setScore }) {
+	//Sets Question
 	const [question, setQuestion] = useState(intialValues);
 	const [index, setIndex] = useState(0);
+	//Sets progress bar
 	const [progress, setProgress] = useState(0);
+	//Sets button usability
 	const [disabled, setDisabled] = useState(false);
+	//Sets error state
 	const [inputError, setInputError] = useState(false);
+	//Refreshes the timer
 	const [key, setKey] = useState(0);
+	//Plays audio
 	const [isPlaying, setIsPlaying] = useState(false);
 	const audioRef = useRef(null);
 	const inputRef = useRef(null);
 
 	useEffect(() => {
+		//Edits the etymology to not to have the same word
 		const pattern = new RegExp(words[index].word, 'g');
 		words[index].etymology = words[index].etymology.replace(pattern, '🏵️🏵️🏵️');
+		//First letter to be Captialized
 		words[index].etymology =
 			words[index].etymology.charAt(0).toUpperCase() +
 			words[index].etymology.slice(1);
@@ -40,15 +50,19 @@ function Game({ words, setResults, isDone, setScore }) {
 			words[index].definition.charAt(0).toUpperCase() +
 			words[index].definition.slice(1);
 
+		//sets the question
 		setQuestion(words[index]);
 
+		//resets the score array for the next game
 		if (score.length >= 10) {
+			//numOfCorrectAnswers = 0;
 			while (score.length) {
 				score.pop();
 			}
 		}
 	}, [words, index]);
 
+	//When game is completed show the results
 	const completeGame = () => {
 		setDisabled(!disabled);
 		setResults(score);
@@ -57,8 +71,10 @@ function Game({ words, setResults, isDone, setScore }) {
 		}, 1000);
 	};
 
+	//Send whatever the user wrote in the input field to the score array if time runs out
 	const timerExpired = () => {
 		setTimeout(() => {
+			//Cleans up the string
 			const response = inputRef.current.value.trim().toLowerCase();
 
 			setKey(key + 1);
@@ -66,53 +82,68 @@ function Game({ words, setResults, isDone, setScore }) {
 			question.word.toLowerCase() === response
 				? score.push({
 						id: index + 1,
+						word_id: question.id,
 						input: response,
 						correct: '✅',
 						answer: question.word,
+						bool: true,
 				  })
 				: score.push({
 						id: index + 1,
+						word_id: question.id,
 						input: response,
 						correct: '❌',
 						answer: question.word,
+						bool: false,
 				  });
 
+			//Checks to see if the spelling matches the dictionary word
 			if (question.word.toLowerCase() === response) {
 				numOfCorrectAnswers++;
 				setScore(numOfCorrectAnswers);
 			}
 
+			//Sets the progress bar progress
 			setProgress(progress + 10);
 
+			//either goes through the useEffect for another render or goes to the results table depending on game state
 			index < words.length - 1 ? setIndex(index + 1) : completeGame();
 
+			//resets the input field
 			inputRef.current.value = '';
 		}, 1000);
 	};
 
+	//Saves results to an array and displays a new word
 	const getNewWord = (e) => {
 		e.preventDefault();
 		const response = e.target.word.value.trim().toLowerCase();
 
+		//Can't submit when input a blank string 
 		if (!response) {
 			setInputError(true);
-			inputRef.current.value = ''
+			inputRef.current.value = '';
 		} else {
 			setInputError(false);
 			setKey(key + 1);
 
+			//Checks to see if response matches the answer
 			question.word.toLowerCase() === response
 				? score.push({
 						id: index + 1,
+						word_id: question.id,
 						input: response,
 						correct: '✅',
 						answer: question.word,
+						bool: true,
 				  })
 				: score.push({
 						id: index + 1,
+						word_id: question.id,
 						input: response,
 						correct: '❌',
 						answer: question.word,
+						bool: false,
 				  });
 
 			if (question.word.toLowerCase() === response) {
@@ -120,15 +151,17 @@ function Game({ words, setResults, isDone, setScore }) {
 				setScore(numOfCorrectAnswers);
 			}
 
+			//updates progress bar 
 			setProgress(progress + 10);
 
-			console.log(score);
+			//triggers useEffect
 			index < words.length - 1 ? setIndex(index + 1) : completeGame();
 
 			e.target.reset();
 		}
 	};
 
+	//Displays buttons on the screen depending on play or pause and if time expires
 	const renderTime = ({ remainingTime }) => {
 		if (remainingTime === 0) {
 			return (
