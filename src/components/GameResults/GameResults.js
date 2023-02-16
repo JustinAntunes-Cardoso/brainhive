@@ -16,14 +16,14 @@ function GameResults({ results, score }) {
 				level: results[0].level,
 			});
 			//post questions data
-			for (let result of results) {
-				await axios.post(`${apiBaseUrl}${apiQuestionEndpoint}`, {
-					game_id: data.game_id,
-					word_id: result.word_id,
-					answer: result.input,
-					correct: result.bool,
-				});
-			}
+			// for (let result of results) {
+			// 	await axios.post(`${apiBaseUrl}${apiQuestionEndpoint}`, {
+			// 		game_id: data.game_id,
+			// 		word_id: result.word_id,
+			// 		answer: result.input,
+			// 		correct: result.bool,
+			// 	});
+			// }
 		} catch (error) {
 			console.error(error);
 		}
