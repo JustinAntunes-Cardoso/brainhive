@@ -37,3 +37,15 @@ The word list for this app was sourced from [The National Spelling Bee](https://
 The audio pronunciations, definitions, etymologies and phonetics were sourced from [Oxford Dictionaries](https://developer.oxforddictionaries.com/).
 
 ---
+
+### Lessons Learned
+- Planning out the project structure and design before starting development helped me to stay organized and work more efficiently.
+- Using Git for version control and committing changes frequently allowed me to easily track my progress and revert changes if needed.
+- One of the biggest challenges I faced was getting educator feedback early on in the development process, which led to some design changes later on that could have been avoided with more educator input.
+
+### Next Steps
+- Add a signup and login page for users to create a profile.
+- Add a feature to allow users to save their progress and come back to a quiz later.
+- Add a history of user's past games on the profile page so users can review past mistakes.
+
+***

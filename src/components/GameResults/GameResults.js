@@ -1,11 +1,11 @@
 import axios from 'axios';
 import './GameResults.scss';
 
-const USER = process.env.REACT_APP_USER || '1';
+const USER = process.env.REACT_APP_USER;
 const apiBaseUrl =
-	process.env.REACT_APP_API_BASE_URL || 'https://brainhive.herokuapp.com';
-const apiGameEndpoint = process.env.REACT_APP_GAME_PATH || '/games';
-const apiQuestionEndpoint = process.env.REACT_APP_QUESTION_PATH || '/questions';
+	process.env.REACT_APP_API_BASE_URL;
+const apiGameEndpoint = process.env.REACT_APP_GAME_PATH;
+const apiQuestionEndpoint = process.env.REACT_APP_QUESTION_PATH;
 
 function GameResults({ results, score }) {
 	const saveGame = async () => {

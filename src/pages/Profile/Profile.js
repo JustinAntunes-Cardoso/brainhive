@@ -2,14 +2,14 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './Profile.scss';
 
-const USER = process.env.USER || '1';
+const USER = process.env.REACT_APP_USER;
 const apiBaseUrl =
-	process.env.API_BASE_URL || 'https://brainhive.herokuapp.com';
-const apiEndpoint = process.env.GAME_PATH || '/games';
+	process.env.REACT_APP_API_BASE_URL;
+const apiEndpoint = process.env.REACT_APP_GAME_PATH;
 
 function ProfilePage() {
 	const [games, setGames] = useState([]);
-
+	//Display user games
 	useEffect(() => {
 		const displayGames = async () => {
 			try {

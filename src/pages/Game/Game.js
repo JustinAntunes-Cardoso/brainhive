@@ -7,8 +7,8 @@ import honey from '../../assets/images/honey_drip_background.png';
 import './Game.scss';
 
 //API connection
-const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || "https://brainhive.herokuapp.com";
-const apiEndpoint = process.env.REACT_APP_WORDS_PATH || '/words';
+const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+const apiEndpoint = process.env.REACT_APP_WORDS_PATH;
 
 function GamePage() {
 	//Sets the game difficulty and word
@@ -19,9 +19,6 @@ function GamePage() {
 	//sets the results and score to a game result component
 	const [results, setResults] = useState(undefined);
 	const [score, setScore] = useState(0);
-
-	console.log(process.env)
-	console.log(`${apiBaseUrl}${apiEndpoint}/${difficulty}`)
 
 	useEffect(() => {
 		//Pulls 10 random words from an API

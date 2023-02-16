@@ -55,6 +55,7 @@ function Game({ words, setResults, isDone, setScore }) {
 
 		//resets the score array for the next game
 		if (score.length >= 10) {
+			//numOfCorrectAnswers = 0;
 			while (score.length) {
 				score.pop();
 			}
