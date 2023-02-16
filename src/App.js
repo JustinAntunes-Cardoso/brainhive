@@ -6,8 +6,6 @@ import CustomPage from './pages/Custom';
 import ProfilePage from './pages/Profile';
 import NotFoundPage from './pages/NotFound';
 import Footer from './components/Footer/Footer';
-// import LoginPage from './pages/Login/Login';
-// import SignupPage from './pages/Signup/Signup';
 import './App.scss';
 
 function App() {
@@ -20,14 +18,6 @@ function App() {
 						path='/'
 						element={<HomePage />}
 					/>
-					{/* <Route
-						path='/login'
-						element={<LoginPage />}
-					/>
-					<Route
-						path='/signup'
-						element={<SignupPage />}
-					/> */}
 					<Route
 						path='/profile/:userId'
 						element={<ProfilePage />}
