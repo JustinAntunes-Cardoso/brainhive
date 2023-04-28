@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Game from '../../components/Game';
 import GameResults from '../../components/GameResults';
-import honey from '../../assets/images/honey_drip_background.png';
+import honey from "../../assets/images/honey_drip_background.png"
 import './Game.scss';
 
 //API connection
@@ -17,7 +17,7 @@ function GamePage() {
 	//checks to see if the game is completed
 	const [done, isDone] = useState(false);
 	//sets the results and score to a game result component
-	const [results, setResults] = useState(undefined);
+	const [results, setResults] = useState([]);
 	const [score, setScore] = useState(0);
 
 	useEffect(() => {
@@ -43,8 +43,8 @@ function GamePage() {
 			/>
 			{/* If the game is done show the results */}
 			{done ? (
-				<GameResults results={results} score={score} done={done}/>
-			) :  words !== undefined ? (
+				<GameResults results={results} score={score} />
+			) : words !== undefined ? (
 				<Game
 					words={words}
 					setResults={setResults}

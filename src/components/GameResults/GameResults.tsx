@@ -1,21 +1,34 @@
 import './GameResults.scss';
 
-function GameResults({ results, score }) {
+interface Results {
+	id: number;
+	word_id: number;
+	input: string;
+	correct: string;
+	answer: string;
+	bool: boolean;
+}
+
+type GameResultsProps = {
+	results: Results[];
+	score: number;
+}
+
+function GameResults({ results, score }: GameResultsProps) {
 
 	return (
 		<section className='game-results'>
-			<h1 className='game-results__title'>{`${
-				score > 8
-					? 'Congratulations!!'
-					: score > 5
+			<h1 className='game-results__title'>{`${score > 8
+				? 'Congratulations!!'
+				: score > 5
 					? 'Keep up the good work!'
 					: 'Keep Practicing.'
-			} You got ${score}/10 correct.`}</h1>
+				} You got ${score}/10 correct.`}</h1>
 			<aside className='game-results__table-container'>
 				<table className='game-results__table'>
 					<thead>
 						<tr>
-							<th colSpan='4'>Game Results</th>
+							<th colSpan={4}>Game Results</th>
 						</tr>
 						<tr>
 							<th>Question</th>
