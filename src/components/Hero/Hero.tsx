@@ -1,6 +1,6 @@
 import React from 'react';
 import hero from '../../assets/images/BrainHiveHero.png'
-import GameSelect from '../../components/GameSelect';
+import GameSelect from '../GameSelect';
 import './Hero.scss';
 
 function Hero() {

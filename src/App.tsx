@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header/Header';
+import Header from './components/Header';
 import HomePage from './pages/Home';
 import GamePage from './pages/Game';
 import CustomPage from './pages/Custom';
 import ProfilePage from './pages/Profile';
 import NotFoundPage from './pages/NotFound';
-import Footer from './components/Footer/Footer';
+import Footer from './components/Footer';
 import './App.scss';
 
 function App() {
