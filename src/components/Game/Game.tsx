@@ -8,8 +8,41 @@ import pauseGrayButton from '../../assets/images/pause-gray.svg';
 import honeyButton from '../../assets/images/Honey_Button.png';
 import './Game.scss';
 
+interface Words {
+	id: string;
+	word: string;
+	audio: string;
+	etymology: string;
+	definition: string;
+	phonetics: string;
+	level: string;
+	created_at: string;
+	updated_at: string;
+}
+
+interface Score {
+	id: number;
+	word_id: number;
+	input: string;
+	correct: string;
+	answer: string;
+	bool: boolean;
+}
+
+type Time = {
+	remainingTime: number;
+}
+
+type GameProps = {
+	words: Words[];
+	setResults: any;
+	isDone: any;
+	setScore: any;
+}
+
 //Initializa values
 const intialValues = {
+	id: '',
 	word: '',
 	phonetics: '',
 	audio: '',
@@ -18,10 +51,10 @@ const intialValues = {
 };
 
 //save results in
-const score = [];
+const score: Score[] = [];
 let numOfCorrectAnswers = 0;
 
-function Game({ words, setResults, isDone, setScore }) {
+function Game({ words, setResults, isDone, setScore }: GameProps) {
 	//Sets Question
 	const [question, setQuestion] = useState(intialValues);
 	const [index, setIndex] = useState(0);
@@ -35,8 +68,8 @@ function Game({ words, setResults, isDone, setScore }) {
 	const [key, setKey] = useState(0);
 	//Plays audio
 	const [isPlaying, setIsPlaying] = useState(false);
-	const audioRef = useRef(null);
-	const inputRef = useRef(null);
+	const audioRef = useRef<HTMLAudioElement>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
 		//Edits the etymology to not to have the same word
@@ -75,54 +108,56 @@ function Game({ words, setResults, isDone, setScore }) {
 	const timerExpired = () => {
 		setTimeout(() => {
 			//Cleans up the string
-			const response = inputRef.current.value.trim().toLowerCase();
+			if (inputRef.current) {
+				const response = inputRef.current.value.trim().toLowerCase();
 
-			setKey(key + 1);
+				setKey(key + 1);
 
-			question.word.toLowerCase() === response
-				? score.push({
+				question.word.toLowerCase() === response
+					? score.push({
 						id: index + 1,
-						word_id: question.id,
+						word_id: Number(question.id),
 						input: response,
 						correct: '✅',
 						answer: question.word,
 						bool: true,
-				  })
-				: score.push({
+					})
+					: score.push({
 						id: index + 1,
-						word_id: question.id,
+						word_id: Number(question.id),
 						input: response,
 						correct: '❌',
 						answer: question.word,
 						bool: false,
-				  });
+					});
 
-			//Checks to see if the spelling matches the dictionary word
-			if (question.word.toLowerCase() === response) {
-				numOfCorrectAnswers++;
-				setScore(numOfCorrectAnswers);
+				//Checks to see if the spelling matches the dictionary word
+				if (question.word.toLowerCase() === response) {
+					numOfCorrectAnswers++;
+					setScore(numOfCorrectAnswers);
+				}
+
+				//Sets the progress bar progress
+				setProgress(progress + 10);
+
+				//either goes through the useEffect for another render or goes to the results table depending on game state
+				index < words.length - 1 ? setIndex(index + 1) : completeGame();
+
+				//resets the input field
+				inputRef.current.value = '';
 			}
-
-			//Sets the progress bar progress
-			setProgress(progress + 10);
-
-			//either goes through the useEffect for another render or goes to the results table depending on game state
-			index < words.length - 1 ? setIndex(index + 1) : completeGame();
-
-			//resets the input field
-			inputRef.current.value = '';
 		}, 1000);
 	};
 
 	//Saves results to an array and displays a new word
-	const getNewWord = (e) => {
+	const getNewWord = (e: any) => {
 		e.preventDefault();
 		const response = e.target.word.value.trim().toLowerCase();
 
 		//Can't submit when input a blank string 
 		if (!response) {
 			setInputError(true);
-			inputRef.current.value = '';
+			if (inputRef.current) inputRef.current.value = '';
 		} else {
 			setInputError(false);
 			setKey(key + 1);
@@ -130,21 +165,21 @@ function Game({ words, setResults, isDone, setScore }) {
 			//Checks to see if response matches the answer
 			question.word.toLowerCase() === response
 				? score.push({
-						id: index + 1,
-						word_id: question.id,
-						input: response,
-						correct: '✅',
-						answer: question.word,
-						bool: true,
-				  })
+					id: index + 1,
+					word_id: Number(question.id),
+					input: response,
+					correct: '✅',
+					answer: question.word,
+					bool: true,
+				})
 				: score.push({
-						id: index + 1,
-						word_id: question.id,
-						input: response,
-						correct: '❌',
-						answer: question.word,
-						bool: false,
-				  });
+					id: index + 1,
+					word_id: Number(question.id),
+					input: response,
+					correct: '❌',
+					answer: question.word,
+					bool: false,
+				});
 
 			if (question.word.toLowerCase() === response) {
 				numOfCorrectAnswers++;
@@ -162,7 +197,7 @@ function Game({ words, setResults, isDone, setScore }) {
 	};
 
 	//Displays buttons on the screen depending on play or pause and if time expires
-	const renderTime = ({ remainingTime }) => {
+	const renderTime = ({ remainingTime }: Time) => {
 		if (remainingTime === 0) {
 			return (
 				<div className='game__timer'>
@@ -194,13 +229,13 @@ function Game({ words, setResults, isDone, setScore }) {
 					src={playButton}
 					className={!isPlaying ? 'game__controls' : 'game__hide'}
 					alt='Play Button'
-					onClick={() => audioRef.current.play()}
+					onClick={() => { if (audioRef.current) audioRef.current.play() }}
 				/>
 				<img
 					src={pauseButton}
 					className={isPlaying ? 'game__controls' : 'game__hide'}
 					alt='Pause Button'
-					onClick={() => audioRef.current.pause()}
+					onClick={() => { if (audioRef.current) audioRef.current.pause() }}
 				/>
 			</div>
 		);
